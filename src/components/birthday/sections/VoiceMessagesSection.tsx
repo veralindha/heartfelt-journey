@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useMouseParallax } from '@/hooks/useMouseParallax';
 import { Play, Pause, SkipForward, SkipBack, Mic, ArrowRight } from 'lucide-react';
@@ -14,9 +14,10 @@ const RECORDINGS = [
 
 interface Props {
   onNext: () => void;
+  bgAudioRef?: React.RefObject<HTMLAudioElement>;
 }
 
-const VoiceMessagesSection = ({ onNext }: Props) => {
+const VoiceMessagesSection = ({ onNext, bgAudioRef }: Props) => {
   const { x, y } = useMouseParallax(8);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -26,6 +27,18 @@ const VoiceMessagesSection = ({ onNext }: Props) => {
   const animFrameRef = useRef<number>(0);
 
   const active = RECORDINGS[activeIndex];
+
+  // Lower background music volume on mount, restore on unmount
+  useEffect(() => {
+    if (bgAudioRef?.current) {
+      bgAudioRef.current.volume = 0.7;
+    }
+    return () => {
+      if (bgAudioRef?.current) {
+        bgAudioRef.current.volume = 1;
+      }
+    };
+  }, [bgAudioRef]);
 
   const updateProgress = () => {
     if (audioRef.current) {
