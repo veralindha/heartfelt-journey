@@ -72,7 +72,7 @@ const BirthdayApp = () => {
       case 3:
         return <GallerySection onNext={goNext} />;
       case 4:
-        return <VoiceMessagesSection onNext={goNext} />;
+        return <VoiceMessagesSection onNext={goNext} bgAudioRef={audioRef} />;
       case 5:
         return <ClosingSection answers={answers} />;
       default:
