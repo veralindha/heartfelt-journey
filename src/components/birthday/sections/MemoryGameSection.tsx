@@ -104,9 +104,9 @@ const MemoryGameSection = ({ onNext }: Props) => {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-6"
         >
-          <h2 className="text-3xl md:text-4xl font-script text-primary">Mini Game</h2>
+          <h2 className="text-3xl md:text-4xl font-script text-primary">Temukan Pasangan Yang Cocok!</h2>
           <p className="text-muted-foreground mt-2 font-body">
-            Temukan pasangan yang cocok!
+            Temukan pasangan yang cocok karena allah ........ !!!!
           </p>
           <div className="mt-2 flex items-center justify-center gap-4 text-sm text-muted-foreground font-body">
             <span>Percobaan: {attempts}</span>
