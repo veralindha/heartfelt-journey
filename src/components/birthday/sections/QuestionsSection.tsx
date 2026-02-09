@@ -5,12 +5,27 @@ import { ArrowRight, MessageCircleHeart, PenLine } from 'lucide-react';
 
 const QUESTIONS = [
   {
-    question: 'Apa momen paling bahagia tahun ini?',
+    question: 'Teks ini hanya kamu saja yang bisa liat, siapapun bahkan aku pun tidak bisa, aku hanya mau kamu cerita pada diri kamu sendiri. Apa momen paling bahagia tahun ini?',
     icon: '✨',
     placeholder: 'Ceritakan momen indahmu...',
   },
   {
-    question: 'Siapa orang yang selalu kamu syukuri?',
+    question: 'Sudahkah kamu bersyukur hari ini?',
+    icon: '💕',
+    placeholder: 'Tuliskan alasannya...',
+  },
+  {
+    question: 'apa yang membuatmu bertahan sejauh ini?',
+    icon: '💕',
+    placeholder: 'Tuliskan alasannya...',
+  },
+  {
+    question: 'siapa yang membuatmu bersyukur atas semuanya?',
+    icon: '💕',
+    placeholder: 'Tuliskan nama dan alasannya...',
+  },
+  {
+    question: 'yang kamu sayangi?',
     icon: '💕',
     placeholder: 'Tuliskan nama dan alasannya...',
   },
