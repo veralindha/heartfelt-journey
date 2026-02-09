@@ -4,12 +4,12 @@ import { useMouseParallax } from '@/hooks/useMouseParallax';
 import { Play, Pause, SkipForward, SkipBack, Mic, ArrowRight } from 'lucide-react';
 
 const RECORDINGS = [
-  { id: 1, title: 'Kenangan Masa Kecil', description: 'Cerita tentang masa kecil kita bersama', src: '/audio/recording-1.mp3' },
-  { id: 2, title: 'Permintaan Maaf', description: 'Hal-hal yang ingin kusampaikan', src: '/audio/recording-2.mp3' },
-  { id: 3, title: 'Ucapan Terima Kasih', description: 'Untuk semua yang telah kamu berikan', src: '/audio/recording-3.mp3' },
-  { id: 4, title: 'Harapan Masa Depan', description: 'Doa dan harapanku untukmu', src: '/audio/recording-4.mp3' },
-  { id: 5, title: 'Cerita Lucu', description: 'Momen konyol yang tak terlupakan', src: '/audio/recording-5.mp3' },
-  { id: 6, title: 'Pesan Terakhir', description: 'Kata-kata dari lubuk hati terdalam', src: '/audio/recording-6.mp3' },
+  { id: 1, title: 'Dari Adik Kecilmu', description: '-', src: '/audio/recording-1.mp3' },
+  { id: 2, title: 'Adik Tersayang', description: '+', src: '/audio/recording-2.mp3' },
+  { id: 3, title: 'Brother', description: 'x', src: '/audio/recording-3.mp3' },
+  { id: 4, title: 'Atap Duniamu, Apak', description: ':', src: '/audio/recording-4.mp3' },
+  { id: 5, title: 'Pijakan Langkahmu, Ibu', description: '=', src: '/audio/recording-5.mp3' },
+  { id: 6, title: 'BTS', description: 'Behind the scene', src: '/audio/recording-6.mp3' },
 ];
 
 interface Props {
