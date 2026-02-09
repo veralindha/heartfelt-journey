@@ -93,7 +93,7 @@ const OpeningSection = ({ onStart }: Props) => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-sm tracking-[0.3em] uppercase text-muted-foreground font-body font-medium"
         >
-          Sebuah Perjalanan Spesial
+          Negeri Matahari Terbit
         </motion.p>
 
         <motion.h1
@@ -102,7 +102,7 @@ const OpeningSection = ({ onStart }: Props) => {
           transition={{ duration: 1, delay: 0.5 }}
           className="mt-6 text-5xl md:text-7xl font-script text-primary leading-tight"
         >
-          Selamat Ulang Tahun
+          Radha Nardilla
         </motion.h1>
 
         <motion.div
@@ -111,7 +111,7 @@ const OpeningSection = ({ onStart }: Props) => {
           transition={{ duration: 0.8, delay: 0.8 }}
         >
           <p className="mt-2 text-2xl md:text-3xl font-display text-foreground italic">
-            Untuk Kakakku Tersayang
+            Untukmu Sister
           </p>
         </motion.div>
 
@@ -122,7 +122,7 @@ const OpeningSection = ({ onStart }: Props) => {
           className="mt-4 flex items-center justify-center gap-3"
         >
           <span className="h-px w-12 bg-primary/40" />
-          <p className="text-muted-foreground font-body text-sm">9 Februari 2026</p>
+          <p className="text-muted-foreground font-body text-sm">12 Februari 2026</p>
           <span className="h-px w-12 bg-primary/40" />
         </motion.div>
 
@@ -137,7 +137,7 @@ const OpeningSection = ({ onStart }: Props) => {
             className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full font-body font-semibold text-lg bg-primary text-primary-foreground shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl animate-pulse-glow"
           >
             <Sparkles className="w-5 h-5 transition-transform group-hover:rotate-12" />
-            <span>Mulai Perjalanan</span>
+            <span>Dari Negeri Seribu Pulau</span>
             <Sparkles className="w-5 h-5 transition-transform group-hover:-rotate-12" />
           </button>
         </motion.div>
