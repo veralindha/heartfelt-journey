@@ -59,7 +59,7 @@ const GallerySection = ({ onNext }: Props) => {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-8"
+          className="text-center mb-4"
         >
           <Camera className="w-8 h-8 text-primary mx-auto mb-2" />
           <h2 className="text-3xl md:text-4xl font-script text-primary">
@@ -69,6 +69,19 @@ const GallerySection = ({ onNext }: Props) => {
             Momen-momen berharga kita bersama
           </p>
         </motion.div>
+
+        {/* Dots - positioned above carousel */}
+        <div className="flex justify-center gap-2 mb-4">
+          {GALLERY_ITEMS.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentSlide(i)}
+              className={`w-2 h-2 rounded-full transition-all ${
+                i === currentSlide ? 'bg-primary scale-125' : 'bg-primary/30'
+              }`}
+            />
+          ))}
+        </div>
 
         {/* Carousel */}
         <div className="relative">
