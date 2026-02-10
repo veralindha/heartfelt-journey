@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useMouseParallax } from '@/hooks/useMouseParallax';
-import { ArrowRight, MessageCircleHeart, PenLine } from 'lucide-react';
+import { ArrowRight, MessageCircleHeart, PenLine, Download, Image } from 'lucide-react';
+import html2canvas from 'html2canvas';
+import { toast } from 'sonner';
 
 const QUESTIONS = [
   {
@@ -46,10 +48,14 @@ const QuestionsSection = ({ onNext, onSaveAnswer }: Props) => {
   const [currentQ, setCurrentQ] = useState(0);
   const [answer, setAnswer] = useState('');
   const [isComplete, setIsComplete] = useState(false);
+  const [savedAnswers, setSavedAnswers] = useState<Record<number, string>>({});
+  const [isExporting, setIsExporting] = useState(false);
+  const reviewRef = useRef<HTMLDivElement>(null);
 
   const handleSubmit = () => {
     if (answer.trim()) {
       onSaveAnswer(QUESTIONS[currentQ].question, answer);
+      setSavedAnswers((prev) => ({ ...prev, [currentQ]: answer }));
     }
 
     if (currentQ < QUESTIONS.length - 1) {
@@ -59,6 +65,27 @@ const QuestionsSection = ({ onNext, onSaveAnswer }: Props) => {
       setIsComplete(true);
     }
   };
+
+  const handleExport = useCallback(async () => {
+    if (!reviewRef.current) return;
+    setIsExporting(true);
+    try {
+      const canvas = await html2canvas(reviewRef.current, {
+        backgroundColor: '#1a1520',
+        scale: 2,
+        useCORS: true,
+      });
+      const link = document.createElement('a');
+      link.download = 'refleksi-ku.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      toast.success('Gambar berhasil disimpan! 📸');
+    } catch {
+      toast.error('Gagal mengekspor gambar');
+    } finally {
+      setIsExporting(false);
+    }
+  }, []);
 
   return (
     <section className="relative w-full h-full flex items-center justify-center overflow-hidden px-4">
@@ -146,20 +173,50 @@ const QuestionsSection = ({ onNext, onSaveAnswer }: Props) => {
               key="complete"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="glass rounded-3xl p-8 md:p-10 text-center"
+              className="glass rounded-3xl p-6 md:p-8 max-h-[80vh] overflow-y-auto"
             >
-              <MessageCircleHeart className="w-16 h-16 text-primary mx-auto" />
-              <h3 className="mt-4 text-2xl font-script text-primary">Terima Kasih</h3>
-              <p className="mt-2 text-muted-foreground font-body">
+              <MessageCircleHeart className="w-12 h-12 text-primary mx-auto" />
+              <h3 className="mt-3 text-2xl font-script text-primary text-center">Refleksimu</h3>
+              <p className="mt-1 text-muted-foreground font-body text-center text-sm">
                 Jawaban-jawabanmu tersimpan sebagai kenangan indah 💕
               </p>
-              <button
-                onClick={onNext}
-                className="mt-6 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground font-body font-semibold shadow-lg hover:scale-105 transition-transform"
+
+              {/* Exportable review card */}
+              <div
+                ref={reviewRef}
+                className="mt-4 rounded-2xl bg-background/80 border border-border/40 p-5 space-y-4"
               >
-                Lanjutkan Perjalanan
-                <ArrowRight className="w-4 h-4" />
-              </button>
+                <p className="text-center font-script text-primary text-lg">✨ Refleksi Hatiku ✨</p>
+                {QUESTIONS.map((q, i) => (
+                  <div key={i} className="border-b border-border/20 pb-3 last:border-b-0 last:pb-0">
+                    <p className="text-xs text-muted-foreground font-body mb-1">
+                      {q.icon} {q.question}
+                    </p>
+                    <p className="text-sm text-foreground font-body leading-relaxed">
+                      {savedAnswers[i] || <span className="italic text-muted-foreground/50">— tidak dijawab —</span>}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Actions */}
+              <div className="mt-5 flex flex-col sm:flex-row items-center justify-center gap-3">
+                <button
+                  onClick={handleExport}
+                  disabled={isExporting}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent text-accent-foreground font-body font-semibold shadow-md hover:scale-105 transition-transform disabled:opacity-50"
+                >
+                  <Image className="w-4 h-4" />
+                  {isExporting ? 'Menyimpan...' : 'Simpan sebagai Gambar'}
+                </button>
+                <button
+                  onClick={onNext}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground font-body font-semibold shadow-lg hover:scale-105 transition-transform"
+                >
+                  Lanjutkan Perjalanan
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
