@@ -137,7 +137,7 @@ const BirthdayApp = () => {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           onClick={goPrev}
-          className="fixed left-4 top-1/2 -translate-y-1/2 z-50 p-3 rounded-full bg-card/60 backdrop-blur-md border border-border/30 shadow-lg hover:scale-110 transition-all duration-300"
+          className="fixed left-4 top-6 z-50 p-3 rounded-full bg-card/60 backdrop-blur-md border border-border/30 shadow-lg hover:scale-110 transition-all duration-300"
           aria-label="Previous"
         >
           <ChevronLeft className="w-5 h-5 text-foreground" />
@@ -148,7 +148,7 @@ const BirthdayApp = () => {
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           onClick={goNext}
-          className="fixed right-4 top-1/2 -translate-y-1/2 z-50 p-3 rounded-full bg-card/60 backdrop-blur-md border border-border/30 shadow-lg hover:scale-110 transition-all duration-300"
+          className="fixed right-14 top-6 z-50 p-3 rounded-full bg-card/60 backdrop-blur-md border border-border/30 shadow-lg hover:scale-110 transition-all duration-300"
           aria-label="Next"
         >
           <ChevronRight className="w-5 h-5 text-foreground" />

@@ -132,18 +132,6 @@ const GallerySection = ({ onNext }: Props) => {
           </motion.p>
         </AnimatePresence>
 
-        {/* Dots - positioned above the carousel */}
-        <div className="flex justify-center gap-2 mt-3 mb-2">
-          {GALLERY_ITEMS.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrentSlide(i)}
-              className={`w-2 h-2 rounded-full transition-all ${
-                i === currentSlide ? 'bg-primary scale-125' : 'bg-primary/30'
-              }`}
-            />
-          ))}
-        </div>
       </div>
     </section>
   );
