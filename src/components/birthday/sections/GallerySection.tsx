@@ -119,8 +119,8 @@ const GallerySection = ({ onNext }: Props) => {
           </motion.p>
         </AnimatePresence>
 
-        {/* Dots */}
-        <div className="flex justify-center gap-2 mt-4">
+        {/* Dots - positioned above the carousel */}
+        <div className="flex justify-center gap-2 mt-3 mb-2">
           {GALLERY_ITEMS.map((_, i) => (
             <button
               key={i}
@@ -131,22 +131,6 @@ const GallerySection = ({ onNext }: Props) => {
             />
           ))}
         </div>
-
-        {/* Continue */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="mt-8 text-center"
-        >
-          <button
-            onClick={onNext}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground font-body font-semibold shadow-lg hover:scale-105 transition-transform"
-          >
-            Lanjutkan
-            <ArrowRight className="w-4 h-4" />
-          </button>
-        </motion.div>
       </div>
     </section>
   );
