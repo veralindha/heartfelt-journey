@@ -31,7 +31,7 @@ const VoiceMessagesSection = ({ onNext, bgAudioRef }: Props) => {
   // Lower background music volume on mount, restore on unmount
   useEffect(() => {
     if (bgAudioRef?.current) {
-      bgAudioRef.current.volume = 0.7;
+      bgAudioRef.current.volume = 0.4;
     }
     return () => {
       if (bgAudioRef?.current) {
