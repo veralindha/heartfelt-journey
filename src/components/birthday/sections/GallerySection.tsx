@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useMouseParallax } from '@/hooks/useMouseParallax';
-import { Camera, ImageIcon } from 'lucide-react';
+import { Camera } from 'lucide-react';
+import galleryPhoto from '@/assets/gallery-1.jpeg';
 
 interface Props {
   onNext: () => void;
@@ -37,11 +38,11 @@ const GallerySection = ({ onNext }: Props) => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="aspect-[4/3] rounded-3xl bg-gradient-to-br from-primary/20 via-accent/10 to-sky-soft/30 flex flex-col items-center justify-center p-8 border border-border/30 shadow-xl"
         >
-          <span className="text-6xl mb-4">📸</span>
-          <ImageIcon className="w-12 h-12 text-muted-foreground/30 mb-3" />
-          <p className="text-muted-foreground/50 font-body text-sm">
-            Tambahkan foto kenangan di sini
-          </p>
+          <img
+            src={galleryPhoto}
+            alt="Kenangan bersama"
+            className="w-full h-full object-cover rounded-3xl"
+          />
         </motion.div>
 
         <motion.p
