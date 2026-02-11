@@ -4,12 +4,12 @@ import { useMouseParallax } from '@/hooks/useMouseParallax';
 import { Play, Pause, SkipForward, SkipBack, Mic, ArrowRight } from 'lucide-react';
 
 const RECORDINGS = [
-  { id: 1, title: 'Dari Adik Kecilmu', description: '-', src: '/audio/recording-1.mp3' },
-  { id: 2, title: 'Adik Tersayang', description: '+', src: '/audio/recording-2.mp3' },
-  { id: 3, title: 'Brother', description: 'x', src: '/audio/recording-3.mp3' },
-  { id: 4, title: 'Atap Duniamu, Apak', description: ':', src: '/audio/recording-4.mp3' },
-  { id: 5, title: 'Pijakan Langkahmu, Ibu', description: '=', src: '/audio/recording-5.mp3' },
-  { id: 6, title: 'BTS', description: 'Behind the scene', src: '/audio/recording-6.mp3' },
+  { id: 1, title: 'Dari Adik Kecilmu', description: '-', src: '/audio/recording-1.mp3', volume: 1 },
+  { id: 2, title: 'Adik Tersayang', description: '+', src: '/audio/recording-2.mp3', volume: 1 },
+  { id: 3, title: 'Brother', description: 'x', src: '/audio/recording-3.mp3', volume: 2 },
+  { id: 4, title: 'Atap Duniamu, Apak', description: ':', src: '/audio/recording-4.mp3', volume: 1 },
+  { id: 5, title: 'Pijakan Langkahmu, Ibu', description: '=', src: '/audio/recording-5.mp3', volume: 1 },
+  { id: 6, title: 'BTS', description: 'Behind the scene', src: '/audio/recording-6.mp3', volume: 1 },
 ];
 
 interface Props {
@@ -25,8 +25,34 @@ const VoiceMessagesSection = ({ onNext, bgAudioRef }: Props) => {
   const [duration, setDuration] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
   const animFrameRef = useRef<number>(0);
+  const gainNodeRef = useRef<GainNode | null>(null);
+  const audioCtxRef = useRef<AudioContext | null>(null);
+  const sourceRef = useRef<MediaElementAudioSourceNode | null>(null);
 
   const active = RECORDINGS[activeIndex];
+
+  // Set up Web Audio API gain node for volume boost
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (!audioCtxRef.current) {
+      const ctx = new AudioContext();
+      const source = ctx.createMediaElementSource(audio);
+      const gain = ctx.createGain();
+      source.connect(gain);
+      gain.connect(ctx.destination);
+      audioCtxRef.current = ctx;
+      sourceRef.current = source;
+      gainNodeRef.current = gain;
+    }
+  }, []);
+
+  // Update gain when active recording changes
+  useEffect(() => {
+    if (gainNodeRef.current) {
+      gainNodeRef.current.gain.value = active.volume;
+    }
+  }, [activeIndex, active.volume]);
 
   // Lower background music volume on mount, restore on unmount
   useEffect(() => {
